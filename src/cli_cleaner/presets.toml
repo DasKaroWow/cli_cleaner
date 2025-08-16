@@ -1,0 +1,250 @@
+[tool.cleaner.presets.python]
+dirs = [
+    "__pycache__",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".nox",
+    ".tox",
+    ".hypothesis",
+    ".benchmarks",
+    "htmlcov",
+    "build",
+    "dist",
+    ".pytype",
+    ".pyre",
+]
+files = [".coverage", "coverage.xml", "nosetests.xml", "pytestdebug.log"]
+globs = [
+    "*.pyc",
+    "*.pyo",
+    "*$py.class",
+    "**/*.egg-info/**",
+    ".coverage.*",
+    "pytest-*.xml",
+    "pytest-*.log",
+    "**/.ipynb_checkpoints/**",
+    "build/**/*.pyd",
+    "dist/**/*.pyd",
+    ".nox/**/*.pyd",
+    ".tox/**/*.pyd",
+    ".coverage.*",
+    "pytest-*.xml",
+    "pytest-*.log",
+    "**/.ipynb_checkpoints/**",
+]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode", "venv", ".venv"]
+
+[tool.cleaner.presets.node]
+dirs = [
+    "node_modules",
+    ".parcel-cache",
+    ".next",
+    ".nuxt",
+    ".svelte-kit",
+    ".vite",
+    ".turbo",
+    ".cache",
+    "coverage",
+    "dist",
+    "build",
+    "out",
+]
+files = [".eslintcache"]
+globs = [
+    "npm-debug.log*",
+    "yarn-debug.log*",
+    "yarn-error.log*",
+    "pnpm-debug.log*",
+    "*.tsbuildinfo",
+    "*.log",
+]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.rust]
+dirs = ["target", "coverage"]
+files = []
+globs = []
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.go]
+dirs = ["bin", "build", "dist", "coverage"]
+files = ["coverage.out"]
+globs = []
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.java]
+dirs = ["target", "build", "out", ".gradle", ".idea/modules", "coverage"]
+files = []
+globs = [
+    "hs_err_pid*.log",
+    "build/**/*.class",
+    "target/**/*.class",
+    "out/**/*.class",
+    "build/**/*.jar",
+    "target/**/*.jar",
+    "out/**/*.jar",
+    "build/**/*.war",
+    "target/**/*.war",
+    "build/**/*.ear",
+    "target/**/*.ear",
+]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.dotnet]
+dirs = ["bin", "obj", ".vs", "TestResults", "artifacts", "coverage"]
+files = []
+globs = []
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.php]
+dirs = [
+    "vendor",
+    "var/cache",
+    "var/log",
+    "storage/framework/cache",
+    "bootstrap/cache",
+    "coverage",
+    "build",
+    "dist",
+]
+files = []
+globs = ["*.log", "storage/logs/*.log"]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.ruby]
+dirs = ["vendor/bundle", ".bundle", "coverage", "tmp", "pkg"]
+files = []
+globs = ["log/*.log"]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.swift]
+dirs = ["DerivedData", ".build", ".swiftpm", "build"]
+files = []
+globs = ["*.xcworkspace/xcuserdata/**", "*.xcodeproj/xcuserdata/**"]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.android]
+dirs = ["build", ".gradle", "app/build", ".cxx", "captures", "coverage"]
+files = []
+globs = []
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.latex]
+dirs = ["build", "out", "_minted*"]
+files = []
+globs = [
+    "*.aux",
+    "*.bbl",
+    "*.bcf",
+    "*.blg",
+    "*.brf",
+    "*.idx",
+    "*.ilg",
+    "*.ind",
+    "*.ist",
+    "*.lof",
+    "*.log",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.run.xml",
+    "*.synctex.gz",
+    "*.fdb_latexmk",
+    "*.fls",
+    "*.nav",
+    "*.snm",
+    "*.vrb",
+    "*.xdv",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.glsdefs",
+]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.haskell]
+dirs = ["dist", "dist-newstyle", ".stack-work", "coverage"]
+files = []
+globs = []
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.elixir]
+dirs = ["_build", "deps", "cover"]
+files = []
+globs = []
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.ansible]
+dirs = []
+files = ["*.retry"]
+globs = []
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode", ".cache"]
+ignored_files = []
+
+[tool.cleaner.presets.c_cpp]
+dirs = [
+    "build",
+    "bin",
+    "obj",
+    ".cache",
+    "CMakeFiles",
+    "Debug",
+    "Release",
+    "x64",
+    "x86",
+    "coverage",
+]
+files = ["CMakeCache.txt"]
+globs = [
+    "build/**/*.o",
+    "build/**/*.obj",
+    "build/**/*.a",
+    "build/**/*.lib",
+    "build/**/*.so",
+    "build/**/*.dylib",
+    "build/**/*.dll",
+    "build/**/*.exe",
+    "bin/**/*.exe",
+    "bin/**/*.dll",
+    "Debug/**/*.*",
+    "Release/**/*.*",
+]
+ignored_dirs = [".git", ".hg", ".svn", ".idea", ".vscode"]
+ignored_files = []
+
+[tool.cleaner.presets.unity]
+dirs = ["Library", "Temp", "Build", "Logs", "Obj"]
+files = []
+globs = []
+ignored_dirs = [".git", ".hg", ".svn"]
+ignored_files = []
+
+[tool.cleaner.presets.unreal]
+dirs = ["Binaries", "DerivedDataCache", "Intermediate", "Saved/Logs"]
+files = []
+globs = []
+ignored_dirs = [".git", ".hg", ".svn"]
+ignored_files = []
+
+[tool.cleaner.presets.os]
+dirs = []
+files = []
+globs = [".DS_Store", "Thumbs.db", "desktop.ini"]
+ignored_dirs = [".git", ".hg", ".svn"]
+ignored_files = []
