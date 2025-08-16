@@ -1,5 +1,12 @@
 # CLI_Cleaner
 
+[![Tests](https://github.com/DasKaroWow/cli_cleaner/actions/workflows/tests.yml/badge.svg)](https://github.com/DasKaroWow/cli_cleaner/actions/workflows/tests.yml)
+[![PyPI version](https://img.shields.io/pypi/v/cli-cleaner.svg)](https://pypi.org/project/cli-cleaner/)
+[![Python versions](https://img.shields.io/pypi/pyversions/cli-cleaner.svg)](https://pypi.org/project/cli-cleaner/)
+[![License](https://img.shields.io/github/license/DasKaroWow/cli_cleaner)](LICENSE)
+[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
+
+
 A command-line tool for safely cleaning files and directories in your project.
 By default, it runs in **dry-run mode** (preview only, nothing deleted). Add `--delete` to actually remove files.
 
