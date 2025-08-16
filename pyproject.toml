@@ -65,3 +65,5 @@ test = "pytest -v"
 precommit = "task format && task lint && task test"
 dump = "python -m scripts.dump"
 
+[tool.cleaner.presets.my]
+files = "project_dump.txt"
