@@ -1,4 +1,4 @@
-# CLI_Cleaner
+# CLI Cleaner
 
 [![Tests](https://github.com/DasKaroWow/cli_cleaner/actions/workflows/tests.yml/badge.svg)](https://github.com/DasKaroWow/cli_cleaner/actions/workflows/tests.yml)
 [![PyPI version](https://img.shields.io/pypi/v/cli-cleaner.svg)](https://pypi.org/project/cli_cleaner/)
