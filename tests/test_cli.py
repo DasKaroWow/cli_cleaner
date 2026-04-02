@@ -1,8 +1,16 @@
 from pathlib import Path
+import re
 
 from click.testing import Result
 from typer import Typer
 from typer.testing import CliRunner
+
+
+ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
+
+
+def strip_ansi(text: str) -> str:
+    return ANSI_RE.sub("", text)
 
 
 def run_cli(app: Typer, *args: str) -> Result:
@@ -11,22 +19,24 @@ def run_cli(app: Typer, *args: str) -> Result:
 
 def test_root_help(cli_app: Typer) -> None:
     result = run_cli(cli_app, "--help")
+    output = strip_ansi(result.output)
 
     assert result.exit_code == 0
-    assert "clean" in result.stdout
-    assert "presets" in result.stdout
+    assert "clean" in output
+    assert "presets" in output
 
 
 def test_clean_help(cli_app: Typer) -> None:
     result = run_cli(cli_app, "clean", "--help")
+    output = strip_ansi(result.output)
 
     assert result.exit_code == 0
-    assert "--dirs" in result.stdout
-    assert "--files" in result.stdout
-    assert "--globs" in result.stdout
-    assert "--ignore-dirs" in result.stdout
-    assert "--ignore-files" in result.stdout
-    assert "--delete" in result.stdout
+    assert "--dirs" in output
+    assert "--files" in output
+    assert "--globs" in output
+    assert "--ignore-dirs" in output
+    assert "--ignore-files" in output
+    assert "--delete" in output
 
 
 def test_dry_run_does_not_delete(cli_app: Typer, sample_tree: dict[str, Path]) -> None:
@@ -112,18 +122,20 @@ def test_globs_patterns(cli_app: Typer, sample_tree: dict[str, Path]) -> None:
 
 def test_clean_without_args_shows_help(cli_app: Typer) -> None:
     result = run_cli(cli_app, "clean")
+    output = strip_ansi(result.output)
 
     assert result.exit_code != 0
-    assert "Usage:" in result.output
-    assert "Clean files" in result.output
+    assert "Usage:" in output
+    assert "Clean files" in output
 
 
 def test_presets_list(cli_app: Typer) -> None:
     result = run_cli(cli_app, "presets", "list")
+    output = strip_ansi(result.output)
 
     assert result.exit_code == 0
-    assert "Cleaner Presets" in result.output
-    assert "python" in result.output
+    assert "Cleaner Presets" in output
+    assert "python" in output
 
 
 def test_presets_export_creates_file(cli_app: Typer, chdir_tmp: Path) -> None:
@@ -138,6 +150,7 @@ def test_presets_export_creates_file(cli_app: Typer, chdir_tmp: Path) -> None:
 
 def test_presets_export_unknown_preset(cli_app: Typer) -> None:
     result = run_cli(cli_app, "presets", "export", "missing-preset")
+    output = strip_ansi(result.output)
 
     assert result.exit_code != 0
-    assert "There is no preset with such name" in result.output
+    assert "There is no preset with such name" in output
