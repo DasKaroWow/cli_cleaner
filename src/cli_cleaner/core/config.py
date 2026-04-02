@@ -1,6 +1,6 @@
-import importlib.resources as resources
 import tomllib
 import unicodedata as ud
+from importlib import resources
 from pathlib import Path
 
 from pydantic import Field, field_validator

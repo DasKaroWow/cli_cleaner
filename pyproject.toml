@@ -1,6 +1,6 @@
 [project]
 name = "CLI_Cleaner"
-version = "1.2"
+version = "1.3"
 description = "A command-line tool for safely cleaning files and directories using customizable rules and dry-run preview"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -12,6 +12,19 @@ dependencies = [
     "rich>=14.1.0",
     "typer>=0.16.0",
 ]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Utilities",
+]
 
 [project.urls]
 Homepage = "https://github.com/DasKaroWow/cli_cleaner"
@@ -19,51 +32,77 @@ Source = "https://github.com/DasKaroWow/cli_cleaner"
 Issues = "https://github.com/DasKaroWow/cli_cleaner/issues"
 
 [project.scripts]
-cleaner = "cli_cleaner.__main__:app"
+cleaner = "cli_cleaner.cli:app"
 
 [dependency-groups]
-dev = [
-    "pytest>=8.4.1",
-    "pytest-mock>=3.14.1",
-    "ruff>=0.12.8",
-    "taskipy>=1.14.1",
-]
+dev = ["pytest>=8.4.1", "pytest-mock>=3.14.1", "taskipy>=1.14.1"]
 
 [build-system]
-requires = ["hatchling>=1.25"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.10.9,<0.11.0"]
+build-backend = "uv_build"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/cli_cleaner"]
-include = [
-  "src/cli_cleaner/presets.toml",
-]
+[tool.uv.build-backend]
+module-root = "src"
+module-name = "cli_cleaner"
 
 [tool.ruff]
+indent-width = 4
+respect-gitignore = true
 line-length = 120
-target-version = "py312"
-src = ["."]
-exclude = ["migrations", ".venv", "__pycache__"]
-
-[tool.ruff.lint]
-select = ["E", "F", "B", "ANN", "ASYNC", "I"]
-ignore = ["E501", "E701"]
-fixable = ["ALL"]
-unfixable = []
+src = ["src"]
+extend-exclude = ["__pycache__"]
 
 [tool.ruff.format]
-quote-style = "double"
+docstring-code-format = true
 indent-style = "space"
 line-ending = "native"
-docstring-code-format = true
-skip-magic-trailing-comma = false
+quote-style = "double"
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D",
+    "FIX",
+    "RUF",
+    "TD",
+    "COM812",
+    "S101",
+    "ERA001",
+    "PLR2004",
+    "E501",
+    "T201",
+    "S113",
+    "S104",
+    "TC001",
+    "G004",
+    "TC002",
+    "UP047",
+    "EM102",
+    "C901",
+    "FBT002",
+    "FBT003",
+    "TC003",
+    "TC006",
+    "TRY301",
+    "EM101",
+    "TRY003",
+]
+isort.split-on-trailing-comma = false
+
+[tool.basedpyright]
+reportUnannotatedClassAttribute = false
+reportUnknownMemberType = true
+reportAny = false
+reportExplicitAny = false
+reportUnusedCallResult = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
 
 [tool.taskipy.tasks]
-lint = "ruff check --no-cache --fix ."
+clean = "cleaner -u python --delete"
+lint = "ruff check --no-cache ."
 format = "ruff format --no-cache ."
-test = "pytest -v"
-precommit = "task format && task lint && task test"
-dump = "python -m scripts.dump"
-
-[tool.cleaner.presets.my]
-files = "project_dump.txt"
+dump = "dumper .py .json .toml .ini -id .venv -id .git -id .github"

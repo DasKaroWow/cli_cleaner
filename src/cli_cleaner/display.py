@@ -1,11 +1,12 @@
 from pathlib import Path
+from typing import Literal
 
 from rich.console import Console
 from rich.markup import escape
 from rich.table import Table
 from rich.theme import Theme
 
-from cli_cleaner.config import DeletionParams
+from cli_cleaner.core.config import DeletionParams
 
 
 class CleanerConsole:
@@ -69,3 +70,13 @@ class CleanerConsole:
             )
 
         self.console.print(table)
+
+    def show_message(self, message: str, level: Literal["info", "warn", "error", "success"] = "info") -> None:
+        styles = {
+            "info": (":information:", "cyan"),
+            "warn": (":warning:", "yellow"),
+            "error": (":x:", "bold red"),
+            "success": (":white_check_mark:", "green"),
+        }
+        icon, style = styles.get(level, ("•", "white"))
+        self.console.print(f"{icon} [{style}]{escape(message)}[/]")

@@ -12,7 +12,7 @@ def matches_any_glob(path: Path, root: Path, patterns: list[str]) -> bool:
 def find_targets(
     root: Path, dirs: list[str], files: list[str], globs: list[str], ignored_dirs: list[str], ignored_files: list[str]
 ) -> set[Path]:
-    paths_to_delete = set()
+    paths_to_delete: set[Path] = set()
 
     for current_root, current_dirs, current_files in root.walk(top_down=True):
         current_path = Path(current_root)
