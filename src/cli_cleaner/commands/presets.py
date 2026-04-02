@@ -13,30 +13,22 @@ app = typer.Typer(name="presets", help="List/show presets")
 def _group_options(  # pyright: ignore[reportUnusedFunction]
     context: typer.Context,
     config_path: Annotated[
-        Path | None,
-        typer.Option(
-            "--config",
-            help="Path to custom .toml file (applies to all 'presets' subcommands)",
-        ),
+        Path | None, typer.Option("--config", help="Path to custom .toml file (applies to all 'presets' subcommands)")
     ] = None,
 ) -> None:
     context.obj = config_path.resolve() if config_path else None
 
+
 @app.command("list", help="List of all presets")
-def presets_list(
-    context: typer.Context
-) -> None:
+def presets_list(context: typer.Context) -> None:
     presets = load_presets(context.obj)
     console = CleanerConsole(False)
     console.show_presets_table(presets)
 
+
 @app.command("export", help=r'Export preset to file named "{preset_name}_exported.toml"')
 def presets_export(
-    context: typer.Context,
-    preset: Annotated[
-        str,
-        typer.Argument(..., help="Preset to export (e.g. python)")
-    ]
+    context: typer.Context, preset: Annotated[str, typer.Argument(..., help="Preset to export (e.g. python)")]
 ) -> None:
     presets = load_presets(context.obj)
     chosen = presets.get(preset)

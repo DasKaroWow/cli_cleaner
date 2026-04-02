@@ -31,16 +31,7 @@ def test_clean_help(cli_app: Typer) -> None:
 
 def test_dry_run_does_not_delete(cli_app: Typer, sample_tree: dict[str, Path]) -> None:
     result = run_cli(
-        cli_app,
-        "clean",
-        "-d",
-        "__pycache__",
-        "-d",
-        ".pytest_cache",
-        "-g",
-        "build/**",
-        "-f",
-        "notes.temp.txt",
+        cli_app, "clean", "-d", "__pycache__", "-d", ".pytest_cache", "-g", "build/**", "-f", "notes.temp.txt"
     )
 
     assert result.exit_code == 0
@@ -104,30 +95,14 @@ def test_ignored_dirs_and_files(cli_app: Typer, sample_tree: dict[str, Path]) ->
 
 
 def test_never_touch_venv(cli_app: Typer, sample_tree: dict[str, Path]) -> None:
-    result = run_cli(
-        cli_app,
-        "clean",
-        "--dirs",
-        "__pycache__",
-        "--ignore-dirs",
-        ".venv",
-        "--delete",
-    )
+    result = run_cli(cli_app, "clean", "--dirs", "__pycache__", "--ignore-dirs", ".venv", "--delete")
 
     assert result.exit_code == 0
     assert sample_tree["venv_pycache"].exists()
 
 
 def test_globs_patterns(cli_app: Typer, sample_tree: dict[str, Path]) -> None:
-    result = run_cli(
-        cli_app,
-        "clean",
-        "-g",
-        "build/**",
-        "-g",
-        "*.temp.*",
-        "--delete",
-    )
+    result = run_cli(cli_app, "clean", "-g", "build/**", "-g", "*.temp.*", "--delete")
 
     assert result.exit_code == 0
     assert not sample_tree["build_artifact"].exists()

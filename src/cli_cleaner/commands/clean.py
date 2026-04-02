@@ -9,6 +9,7 @@ from cli_cleaner.display import CleanerConsole
 
 app = typer.Typer()
 
+
 @app.command(name="clean", help="Clean files", no_args_is_help=True)
 def clean(
     dirs: Annotated[

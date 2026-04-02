@@ -11,15 +11,7 @@ from cli_cleaner.core.config import DeletionParams
 
 class CleanerConsole:
     def __init__(self, delete_mode: bool) -> None:
-        theme = Theme(
-            {
-                "dry": "yellow",
-                "delete": "bold red",
-                "path": "dim",
-                "ok": "green",
-                "err": "bold red",
-            }
-        )
+        theme = Theme({"dry": "yellow", "delete": "bold red", "path": "dim", "ok": "green", "err": "bold red"})
         self.console = Console(theme=theme)
         self.delete_mode = delete_mode
 
